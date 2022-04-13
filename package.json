@@ -42,9 +42,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-vue-admin-serve   --sticky",
+    "start": "egg-scripts start",
     "stop": "egg-scripts stop --title=egg-server-vue-admin-serve",
-    "dev": "egg-bin dev --sticky",
+    "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "real-test": "cross-env   NODE_ENV=test npx sequelize db:migrate && egg-bin cov",
