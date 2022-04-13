@@ -39,10 +39,10 @@ module.exports = {
     enable: true,
     package: "egg-socket.io",
   },
-  redis: {
-    enable: true,
-    package: "egg-redis",
-  },
+  // redis: {
+  //   enable: true,
+  //   package: "egg-redis",
+  // },
 
   passport :{
     enable: true,
