@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表单域的使用</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0;
+      }
+      .console-wrapper {
+        height: 20vh;
+        width: 100vw;
+        border: 1px solid red;
+        padding: 0;
+        margin: 0;
+      }
+
+      #console {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+  <body>
+    <ul>
+      <li></li>
+    </ul>
+    <div class="console-wrapper">
+      <textarea id="console">1111</textarea>
+      <button id="btn">点击发送消息</button>
+    </div>
+  </body>
+  <script>
+    window.onload = function () {
+      const socket = io("/", {
+        // 实际使用中可以在这里传递参数
+        query: {
+          room: "room",
+          userId: `client_${Math.random()}`,
+        },
+        transports: ["websocket"],
+      });
+
+      socket.on("connect", () => {
+        console.log("登录服务器成功");
+          document.getElementById("btn").addEventListener("click", function () {
+         console.log("正在链接");
+         socket.emit("exchange", 
+         "xiaomeimei");
+      });
+      });
+
+      const id = socket.id;
+      // 监听自身 id 以实现 p2p 通讯
+      socket.emit(id, (msg) => {
+        console.log("#receive,", msg);
+      });
+
+      socket.on("online", (msg) => {
+        console.log("#online,", msg);
+      });
+      socket.emit("xiaomei",234)
+
+      // 系统事件
+      socket.on("disconnect", (msg) => {
+        console.log("#disconnect", msg);
+      });
+
+      socket.on("res", (msg) => {
+        console.log("res", msg);
+      });
+
+      socket.on("disconnecting", () => {
+        console.log("#disconnecting");
+      });
+
+      socket.on("error", () => {
+        console.log("#error");
+      });
+    };
+  </script>
+</html>

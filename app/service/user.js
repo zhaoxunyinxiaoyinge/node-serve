@@ -6,8 +6,7 @@ class UserService extends Service {
       this.root='https://cnodejs.org/api/v1';
   }
   async list(params) {
-    const result = await this.app.model.User.findAll();
-    // this.checkStatus(result);
+    const result = await this.ctx.app.model.Users.findAll();
     return result;
   }
 

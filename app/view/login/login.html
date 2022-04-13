@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录页面</title>
+  </head>
+  <style>
+      label {
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+      }
+      div {
+        margin: 20px 0;
+      }
+
+      input,button{
+        height: 28px;
+      }
+  </style>
+  <body>
+    <form style="padding: 40px;" method="POST" action="/login">
+      <div><label>用户名:&nbsp;</label><input type="text" name="username" /></div>
+      <div><label>密码:&nbsp;</label><input type="password" name="password" /></div>
+      <div>
+        <label for=""></label>
+        <button>登录</button>
+      </div>
+      
+    </form>
+  </body>
+</html>

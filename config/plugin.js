@@ -8,6 +8,11 @@ module.exports = {
     enable: true,
   },
 
+  swaggerdoc: {
+    enable: true,
+    package: "egg-swagger-doc",
+  },
+
   sequelize: {
     enable: true,
     package: "egg-sequelize",
@@ -22,10 +27,33 @@ module.exports = {
   },
   validate: {
     enable: true,
-    package: 'egg-validate',
+    package: "egg-validate",
+  },
+
+  // 这里时开启跨域的配置
+  cors: {
+    enable: true,
+    package: "egg-cors",
+  },
+  io: {
+    enable: true,
+    package: "egg-socket.io",
+  },
+  redis: {
+    enable: true,
+    package: "egg-redis",
+  },
+
+  passport :{
+    enable: true,
+    package: 'egg-passport',
+  },
+
+  // 这里是本地登录的配置
+passportLocal :{
+    enable: true,
+    package: 'egg-passport-local',
   }
 };
 
-/* 这是egg-mysql配置，不涉及到egg-sequelize配置*/
-
-// */
+// 这是生成配置文档接口包文件

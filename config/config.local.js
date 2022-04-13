@@ -3,13 +3,13 @@ exports.mysql = {
   // 单数据库信息配置
   client: {
     // host
-    host: '127.0.0.1',
+    host: "sh-cynosdbmysql-grp-rcf9rc6q.sql.tencentcdb.com",
     // 端口号
-    port: '3306',
+    port: '25325',
     // 用户名
     user: 'root',
     // 密码
-    password: 'root',
+    password: 'zhaoxunyin1234567.com',
     // 数据库名
     database: 'vue-admin',
   },
