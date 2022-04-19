@@ -3,32 +3,27 @@
 module.exports = app => {
   const DataTypes = app.Sequelize;
 
-  const Model = app.model.define('users', {
+  const Model = app.model.define('user_menu', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    user_name: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      defaultValue: ''
-    },
-    role_name: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      defaultValue: ''
-    },
-    sex: {
+    order: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: '0'
     },
-    password: {
+    component: {
       type: DataTypes.STRING(50),
       allowNull: false,
       defaultValue: ''
+    },
+    status: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: '0'
     },
     create_time: {
       type: DataTypes.TIME,
@@ -38,20 +33,37 @@ module.exports = app => {
       type: DataTypes.TIME,
       allowNull: true
     },
-    token: {
+    path: {
       type: DataTypes.STRING(50),
       allowNull: true
     },
-    avatar: {
+    name: {
       type: DataTypes.STRING(50),
       allowNull: true
     },
-    tel_phone: {
+    title: {
       type: DataTypes.STRING(50),
       allowNull: true
+    },
+    hidden: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    icon: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    no_cancle: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    parentId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      defaultValue: '0'
     }
   }, {
-    tableName: 'users'
+    tableName: 'user_menu'
   });
 
   Model.associate = function() {

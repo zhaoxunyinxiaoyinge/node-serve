@@ -13,6 +13,8 @@ module.exports = (appInfo) => {
    **/
   const config = (exports = {});
 
+  const path=require("path");
+
   // 默认是开启了安全验证，防止csrf攻击
   config.security = {
     xframe: {
@@ -57,17 +59,16 @@ module.exports = (appInfo) => {
   (config.errorHandler = {
     match: "/user", //只能user设置错误中间件
   }),
-
-  config.sequelize = {
+    (config.sequelize = {
       dialect: "mysql",
       host: "sh-cynosdbmysql-grp-rcf9rc6q.sql.tencentcdb.com",
       port: 25325,
       database: "vue-admin",
       password: "zhaoxunyin1234567.com",
-      define:{
-        timestamps:false,
-      }
-    }
+      define: {
+        timestamps: false,
+      },
+    });
 
   // 国际化
   config.i18n = {
@@ -101,7 +102,7 @@ module.exports = (appInfo) => {
   // 普通文件上传的模式
   config.multipart = {
     // mode: "file",普通上传文件的方式
-    mode:"stream"   //用流的方式来处理上传文件
+    mode: "stream", //用流的方式来处理上传文件
   };
 
   //设置跨域的域名和一些方法
@@ -110,32 +111,53 @@ module.exports = (appInfo) => {
     allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH",
   };
 
-
   // 单独配置，redis
   config.redis = {
     client: {
       port: 6379,
-      host: '127.0.0.1',
-      password: '',
+      host: "127.0.0.1",
+      password: "",
       db: 0,
     },
   };
 
-  config.io={
-    init: { 
-      wsEngine: 'ws',
+  // 提供支持上传文件到oss服务
+  config.oss = {
+    client: {
+      accessKeyId: "AKIDa0B7oGTTEj02oLdgT1KNBj26vUotiIch",
+      accessKeySecret: "sUryrUs0tXw5ze3DBuNbZJo33oKabNtA",
+      bucket: "file-list-1234-1258637789",
+      endpoint:
+        "https://file-list-1234-1258637789.cos.ap-guangzhou.myqcloud.com",
+      timeout: "60s",
+      // accessKeyId 和 accessKeySecret 是否经过 egg-bin 加密的
+      // encryptPassword: false,
+    },
+  };
+
+  config.io = {
+    init: {
+      wsEngine: "ws",
     },
     namespace: {
-      '/': {
-        connectionMiddleware: ['auth'],
+      "/": {
+        connectionMiddleware: ["auth"],
         packetMiddleware: [],
       },
     },
     redis: {
-      host:"127.0.0.1",
-      port:6379,
+      host: "127.0.0.1",
+      port: 6379,
     },
-  }
+  };
+
+  // egg支持https服务开启的常用配置
+  config.cluster = {
+    https: {
+      key: path.join(__dirname, "../perssion/aidouc.work.key"),
+      cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
+    },
+  };
 
   return {
     ...config,

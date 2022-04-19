@@ -16,6 +16,7 @@ class UserController extends Controller {
    * @request query string str 随机字符串
    * @response 200 testResponse
    */
+  
   async index(){
     let token=this.ctx.query;
     console.log(token);
