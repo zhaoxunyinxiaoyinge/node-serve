@@ -126,7 +126,7 @@ class UserController extends Controller {
    */
   async destroy() {
     let params = this.ctx.params;
-    let id = params?.id;
+    let id = params.id;
     let data = {};
     if (id) {
       try {
