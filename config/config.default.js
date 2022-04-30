@@ -151,12 +151,12 @@ module.exports = (appInfo) => {
   };
 
   // egg支持https服务开启的常用配置
-  // config.cluster = {
-  //   https: {
-  //     key: path.join(__dirname, "../perssion/aidouc.work.key"),
-  //     cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
-  //   },
-  // };
+  config.cluster = {
+    https: {
+      key: path.join(__dirname, "../perssion/aidouc.work.key"),
+      cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
+    },
+  };
 
   return {
     ...config,
