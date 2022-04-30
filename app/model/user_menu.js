@@ -25,11 +25,11 @@ module.exports = app => {
       allowNull: false,
       defaultValue: '0'
     },
-    create_time: {
+    createdAt: {
       type: DataTypes.TIME,
       allowNull: true
     },
-    update_time: {
+    updatedAt: {
       type: DataTypes.TIME,
       allowNull: true
     },
@@ -50,7 +50,7 @@ module.exports = app => {
       allowNull: true
     },
     icon: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(50),
       allowNull: true
     },
     no_cancle: {

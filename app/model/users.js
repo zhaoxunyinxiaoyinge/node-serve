@@ -30,25 +30,28 @@ module.exports = app => {
       allowNull: false,
       defaultValue: ''
     },
-    create_time: {
+    updatedAt: {
       type: DataTypes.TIME,
-      allowNull: true
-    },
-    update_time: {
-      type: DataTypes.TIME,
-      allowNull: true
+      allowNull: true,
+      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
     },
     token: {
       type: DataTypes.STRING(50),
       allowNull: true
     },
     avatar: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(255),
       allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.TIME,
+      allowNull: true,
+      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
     },
     tel_phone: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: true,
+      defaultValue: ''
     }
   }, {
     tableName: 'users'

@@ -14,6 +14,10 @@ module.exports = app => {
       type: DataTypes.STRING(50),
       allowNull: true
     },
+    dict_type: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
     dict_status: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
@@ -47,14 +51,22 @@ module.exports = app => {
       defaultValue: '0'
     },
     dict_label_comment: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      defaultValue: '0'
+      type: DataTypes.STRING(50),
+      allowNull: true
     },
     dict_value: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.TIME,
       allowNull: true,
-      defaultValue: '0'
+      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
+    },
+    updatedAt: {
+      type: DataTypes.TIME,
+      allowNull: true,
+      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
     }
   }, {
     tableName: 'dict_map'

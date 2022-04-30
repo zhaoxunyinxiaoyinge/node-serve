@@ -66,7 +66,7 @@ module.exports = (appInfo) => {
       database: "vue-admin",
       password: "zhaoxunyin1234567.com",
       define: {
-        timestamps: false,
+        timestamps: true,
       },
     });
 
@@ -122,18 +122,17 @@ module.exports = (appInfo) => {
   };
 
   // 提供支持上传文件到oss服务
-  config.oss = {
-    client: {
-      accessKeyId: "AKIDa0B7oGTTEj02oLdgT1KNBj26vUotiIch",
-      accessKeySecret: "sUryrUs0tXw5ze3DBuNbZJo33oKabNtA",
-      bucket: "file-list-1234-1258637789",
-      endpoint:
-        "https://file-list-1234-1258637789.cos.ap-guangzhou.myqcloud.com",
-      timeout: "60s",
-      // accessKeyId 和 accessKeySecret 是否经过 egg-bin 加密的
-      // encryptPassword: false,
-    },
-  };
+  // config.oss = {
+  //   client: {
+  //     accessKeyId: "AKIDa0B7oGTTEj02oLdgT1KNBj26vUotiIch",
+  //     accessKeySecret: "sUryrUs0tXw5ze3DBuNbZJo33oKabNtA",
+  //     bucket: "file-list-1234-1258637789",
+  //     endpoint:"cos.ap-guangzhou.myqcloud.com",
+  //     timeout: "60s",
+  //     // accessKeyId 和 accessKeySecret 是否经过 egg-bin 加密的
+  //     // encryptPassword: false,
+  //   },
+  // };
 
   config.io = {
     init: {
@@ -152,12 +151,12 @@ module.exports = (appInfo) => {
   };
 
   // egg支持https服务开启的常用配置
-  config.cluster = {
-    https: {
-      key: path.join(__dirname, "../perssion/aidouc.work.key"),
-      cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
-    },
-  };
+  // config.cluster = {
+  //   https: {
+  //     key: path.join(__dirname, "../perssion/aidouc.work.key"),
+  //     cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
+  //   },
+  // };
 
   return {
     ...config,

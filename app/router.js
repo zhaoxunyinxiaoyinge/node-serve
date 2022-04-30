@@ -27,8 +27,17 @@ module.exports = (app) => {
 
   // 这是定义一个resultApi
 
+  router.post('/uploadImage',controller.upload.uploadImage);
+
   app.router.resources('login',"/api/login",app.controller.login);
   app.router.resources("user", "/api/user", app.controller.user);
   app.router.resources("home", "/api/home", app.controller.home);
+
+  app.router.resources('userMenu','/api/user_menu',app.controller.userMenu);
+
+  app.router.resources("dictMap",'/api/dict_map',app.controller.dictMap);
+
+  app.router.resources("user_role","/api/user_role",app.controller.userRole);
+
   app.router.redirect("/swagger", "/swagger-ui.html", 302);
 };

@@ -53,7 +53,16 @@ module.exports = {
 passportLocal :{
     enable: true,
     package: 'egg-passport-local',
+  },
+
+  oss : {
+    enable: true,
+    package: 'egg-oss',
   }
+
+
 };
+
+
 
 // 这是生成配置文档接口包文件
