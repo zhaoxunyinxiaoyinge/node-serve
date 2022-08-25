@@ -61,6 +61,25 @@ module.exports = app => {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       defaultValue: '0'
+    },
+    alwaysShow: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: '1'
+    },
+    isMenu: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      defaultValue: '1'
+    },
+    isOutLink: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      defaultValue: '0'
+    },
+    operationPerssion: {
+      type: DataTypes.STRING(200),
+      allowNull: true
     }
   }, {
     tableName: 'user_menu'

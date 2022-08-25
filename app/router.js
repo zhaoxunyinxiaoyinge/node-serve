@@ -39,5 +39,7 @@ module.exports = (app) => {
 
   app.router.resources("user_role","/api/user_role",app.controller.userRole);
 
+  app.router.resources("bananer","/api/bananer",app.controller.bananer);
+
   app.router.redirect("/swagger", "/swagger-ui.html", 302);
 };

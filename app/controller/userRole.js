@@ -100,6 +100,26 @@ class RolesController extends Controller {
 
     this.ctx.body = res;
   }
+
+
+  async update(){
+    let { id } = this.ctx.params;
+    let data=this.ctx.request.body;
+    let res = {};
+    try {
+      res.data = await this.ctx.model.UserRoles.update({...data},{
+        where: {
+          id,
+        },
+      });
+      res.code = 0;
+    } catch (e) {
+      res.code = -1;
+      res.data = e;
+    }
+
+    this.ctx.body = res;
+  }
 }
 
 module.exports = RolesController;

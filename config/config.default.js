@@ -66,7 +66,7 @@ module.exports = (appInfo) => {
       database: "vue-admin",
       password: "zhaoxunyin1234567.com",
       define: {
-        timestamps: true,
+        timestamps:false,
       },
     });
 

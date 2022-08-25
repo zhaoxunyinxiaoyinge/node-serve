@@ -19,48 +19,28 @@ class UserController extends Controller {
    */
 
   async index() {
-    let {id, user_name, password, checked, limit, offset,token} =
-      this.ctx.query;
-    let data = {};
+    let {id, user_name, password, checked, limit=10,role_name,page=1,token} =this.ctx.query;
+      let data = {};
+      let where={};
+      if(checked){
+        limit=99999;
+      }
+      let pages=(page-1)*limit;
+      Object.keys(this.ctx.query).forEach(item=>{
+        if(this.ctx.query[item]!==''&&item!==null&&item!==undefined&&item!=='checked'&&item!=='page'&&item!=='limit'&&item!=='pageSize'){
+          where[item]=this.ctx.query[item];
+        }
+      })
     try {
-      if (id) {
-        data.data = await this.ctx.app.model.Users.findAll(
-          { limit },
-          {
-            where: { id },
-          }
-        );
-      }
-      if (user_name && password) {
-        data.data = await this.ctx.app.model.Users.findAll({
-          where: {
-            user_name,
-            password,
-          },
-        });
-      }
-
-      if (checked) {
-        let page = (offset - 1) * limit;
-        data.data = await this.ctx.app.model.Users.findAndCountAll({
-          offset: page,
-          limit: 10,
-        });
-        data.offset = offset;
-        data.limit = limit;
-      }
-
-      if(token){
-        data.data=await this.ctx.app.model.Users.findAll({
-          where:{
-            token
-          }
-        })
-      }
-
+      data.data = await this.ctx.app.model.Users.findAndCountAll({
+        where,
+        offset: pages,
+        limit:Number(limit),
+      });
       data.code = 0;
       data.message = "查询成功";
     } catch (e) {
+      console.log(e,555)
       data.error = e;
       data.code = -1;
     }
