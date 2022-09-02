@@ -1,4 +1,3 @@
-const { parseMsg } = require("../extend/helper");
 
 const Controller = require("egg").Controller;
 class DictController extends Controller {

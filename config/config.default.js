@@ -13,7 +13,12 @@ module.exports = (appInfo) => {
    **/
   const config = (exports = {});
 
-  const path=require("path");
+  const path = require("path");
+
+
+  // 生成token的key值为 tokenStr
+
+  config.secretStr="shixianlitaibaiyyds";
 
   // 默认是开启了安全验证，防止csrf攻击
   config.security = {
@@ -30,9 +35,9 @@ module.exports = (appInfo) => {
   // 配置seesion的配置
   config.session = {
     key: "EGG_SESS",
-    maxAge: 24 * 3600 * 1000, // 1 天
+    maxAge: 7200000, // 1 天
     httpOnly: true,
-    encrypt: true,
+    // encrypt: true,
     renew: true, //当用户在操作时，会重复执行session.
   };
 
@@ -40,13 +45,22 @@ module.exports = (appInfo) => {
   config.keys = appInfo.name + "_1641183176217_2339";
 
   // add your middleware config here
-  config.middleware = ["errorHandler"];
+  config.middleware = ["errorHandler", "msg"];
 
   // add your user config here
   const userConfig = {
     // myAppName: 'egg'
     pageSize: 5,
     serverUrl: "https://hacker-news.firebaseio.com/v0",
+    // appid: "wxf3dc859a604396ce",
+    /**测试公众号appid 和appsecret */
+    appid:'wxa09a85bc80fdb723',
+    secret:"05a2790261643ae75925e07b810b3d84",
+    // secret: "bd64484875db53cc1c1f23cfcb1f5130",
+
+    grant_type: "client_credential",
+    access_token:'',
+    jsapi_ticket:""
   };
 
   config.view = {
@@ -59,6 +73,9 @@ module.exports = (appInfo) => {
   (config.errorHandler = {
     match: "/user", //只能user设置错误中间件
   }),
+    (config.msg = {
+      match: "/api/gongzhaohao",
+    }),
     (config.sequelize = {
       dialect: "mysql",
       host: "sh-cynosdbmysql-grp-rcf9rc6q.sql.tencentcdb.com",
@@ -66,7 +83,7 @@ module.exports = (appInfo) => {
       database: "vue-admin",
       password: "zhaoxunyin1234567.com",
       define: {
-        timestamps:false,
+        timestamps: false,
       },
     });
 
@@ -101,8 +118,8 @@ module.exports = (appInfo) => {
 
   // 普通文件上传的模式
   config.multipart = {
-    // mode: "file",普通上传文件的方式
-    mode: "stream", //用流的方式来处理上传文件
+    mode: "file",//普通上传文件的方式
+    //  mode: "stream", //用流的方式来处理上传文件
   };
 
   //设置跨域的域名和一些方法
@@ -112,14 +129,14 @@ module.exports = (appInfo) => {
   };
 
   // 单独配置，redis
-  config.redis = {
-    client: {
-      port: 6379,
-      host: "127.0.0.1",
-      password: "",
-      db: 0,
-    },
-  };
+  // config.redis = {
+  //   client: {
+  //     port: 6379,
+  //     host: "127.0.0.1",
+  //     password: "",
+  //     db: 0,
+  //   },
+  // };
 
   // 提供支持上传文件到oss服务
   // config.oss = {
@@ -144,10 +161,10 @@ module.exports = (appInfo) => {
         packetMiddleware: [],
       },
     },
-    redis: {
-      host: "127.0.0.1",
-      port: 6379,
-    },
+    // redis: {
+    //   host: "127.0.0.1",
+    //   port: 6379,
+    // },
   };
 
   // egg支持https服务开启的常用配置
@@ -157,7 +174,6 @@ module.exports = (appInfo) => {
       cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
     },
   };
-
   return {
     ...config,
     ...userConfig,

@@ -7,6 +7,7 @@
     "declarations": true
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "cos-nodejs-sdk-v5": "^2.11.7",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
@@ -21,12 +22,16 @@
     "egg-swagger-doc": "^2.3.2",
     "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.3.0",
+    "fast-xml-parser": "^4.0.9",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "multer": "^1.4.4",
     "mysql2": "^2.3.3",
     "mz": "^2.7.0",
     "mz-modules": "^2.1.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.88.2",
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",
@@ -44,7 +49,7 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --deamon",
+    "start": "egg-scripts start --daemon",
     "stop": "egg-scripts stop --title=egg-server-vue-admin-serve",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",

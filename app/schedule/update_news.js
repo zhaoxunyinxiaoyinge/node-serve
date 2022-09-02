@@ -1,10 +1,17 @@
 module.exports = {
   schedule: {
-    interval: "1000m", // 1 分钟间隔
+    interval: "2h", //间隔 (2h执行任务操作)
     type: "all", // 指定所有的 worker 都需要执行
   },
   async task(ctx) {
-    console.log("我是任务,我在间隔的任务时间端执行一次");
-    ctx.app.cache = res.data;
+    // 获取公众号自定义菜单的access_token
+    let result = await ctx.service.getAccToken.getToken();
+    ctx.session.access_token=result.data.access_token;
+    ctx.app.config.access_token=ctx.session.access_token;
+
+    // 获取公众号网页生成签名的jsapi_sticket
+    let data = await ctx.service.getAccToken.getTicket();
+    ctx.session.ticket = data.data.ticket;
+    ctx.app.config.jsapi_ticket=data.data.ticket;
   },
 };

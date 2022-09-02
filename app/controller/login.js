@@ -20,16 +20,32 @@ class Login extends Controller {
           password,
         },
       });
-      if(data.length==0){
-         this.ctx.body={msg:"当前用户不存在",code:-1};
-      }else{
-         this.ctx.body = {
-           msg:"请求成功",
-           code:0,
-           data
-         }
+      if (data.length == 0) {
+        this.ctx.body = { msg: "当前用户不存在", code: -1 };
+      } else {
+        let secretStr = this.ctx.app.config.secretStr;
+        let token = this.ctx.helper.createToken(
+          { username, password },
+          secretStr
+        );
+
+        // 将token 写入对应的数据库用户
+        let res = await this.ctx.model.Users.update(
+          { "token": token },
+          {
+            where: {
+              "id":data[0].id
+            }
+          }
+        );
+        console.log(res, "res");
+        data[0].token = token;
+        this.ctx.body = {
+          msg: "请求成功",
+          code: 0,
+          data,
+        };
       }
-     
     } catch (e) {}
   }
 }
