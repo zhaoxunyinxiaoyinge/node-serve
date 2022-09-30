@@ -12,10 +12,20 @@ class RolesController extends Controller {
    * @response 200 testResponse
    */
   async index() {
-    let { page = 1, pageSize = 10, ids } = this.ctx.query;
+    let { page = 1, pageSize = 10, ids,role_name,role_status } = this.ctx.query;
     let res = {};
     let offset = (page - 1) * pageSize;
     let limit = Number(pageSize);
+    let where={};
+    if(role_name){
+      console.log("zhixingle ")
+      where.role_name=role_name;
+    }
+    if(role_status!==undefined&&role_status!==null&&role_status!==""){
+      console.log("zhixingle ")
+       where.role_status=role_status;
+    }
+    console.log( where,"where")
     try {
       if (ids) {
         let arrs=ids.split(",").map(item=>Number(item));
@@ -42,6 +52,7 @@ class RolesController extends Controller {
         res.data = await this.ctx.model.UserRoles.findAndCountAll({
           offset,
           limit,
+          where
         });
       }
       res.code = 0;

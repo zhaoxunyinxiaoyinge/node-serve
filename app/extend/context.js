@@ -6,7 +6,7 @@
 module.exports = {
   // 设置文本的回复消息
   getMessageAuto(options) {
-    console.log(options.MsgType,options);
+    console.log(options.MsgType, options);
     let xml = "";
     if (options.MsgType == "text") {
       xml = this.setText({
@@ -25,17 +25,19 @@ module.exports = {
       xml = this.setImageText(options);
     } else if (options.MsgType == "event") {
       if (options.Event == "subscribe") {
-        xml=this.setText({
+        xml = this.setText({
           ...options,
           val: "感谢关注博主的公众号,博主正在找前端工作",
         });
-      }else if(options.Event=='CLICK'){
-        if(options.EventKey=='V1001_GOOD'){
-          xml=this.setText({...options,val:'你喜欢哪首歌曲'})
+      } else if (options.Event == "CLICK") {
+        if (options.EventKey == "V1001_GOOD") {
+          xml = this.setText({ ...options, val: "你喜欢哪首歌曲" });
         }
-        if(options.EventKey=='V1001_TODAY_MUSIC'){
-          xml=this.setMusic({...options,playUrl:''})
+        if (options.EventKey == "V1001_TODAY_MUSIC") {
+          xml = this.setMusic({ ...options, playUrl: "" });
         }
+      } else if (options.Event == "LOCATION") {
+        xml=this.setAreaMap({...options})
       }
     }
     return xml;
@@ -46,7 +48,9 @@ module.exports = {
       options.FromUserName
     }]]></ToUserName><FromUserName><![CDATA[${
       options.ToUserName
-    }]]></FromUserName><CreateTime>${Date.now()}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${options.val}]]></Content></xml>`;
+    }]]></FromUserName><CreateTime>${Date.now()}</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[${
+      options.val
+    }]]></Content></xml>`;
     return text;
   },
   setImage(options) {
@@ -85,7 +89,7 @@ module.exports = {
       <Description><![CDATA[今天不知名主播竟然做了这么一件丑事。。。。]]></Description>
     </Video>
   </xml>`;
-  return video
+    return video;
   },
   setMusic(options) {
     let music = `<xml>
@@ -125,5 +129,19 @@ module.exports = {
     </Articles>
   </xml>`;
     return pictureText;
+  },
+
+  setAreaMap(options) {
+    let areaText = `<xml>
+      <ToUserName><![CDATA[${options.FromUserName}]]></ToUserName>
+      <FromUserName><![CDATA[${options.ToUserName}]]></FromUserName>
+      <CreateTime>${Date.now()}</CreateTime>
+      <MsgType><![CDATA[event]]></MsgType>
+      <Event><![CDATA[LOCATION]]></Event>
+      <Latitude>${options.Latitude}</Latitude>
+      <Longitude>${options.Longitude}</Longitude>
+      <Precision>${options.Precision}</Precision>
+    </xml>`;
+    return areaText
   },
 };

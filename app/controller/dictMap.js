@@ -1,5 +1,6 @@
 
 const Controller = require("egg").Controller;
+const { Op } = require("sequelize");
 class DictController extends Controller {
   async create() {
     let res = {};
@@ -18,15 +19,29 @@ class DictController extends Controller {
   }
 
   async index() {
-    let { page=1, pageSize=10, parent_id } = this.ctx.query;
+    let { page=1, pageSize=10, parent_id,time,dict_name,dict_status} = this.ctx.query;
     let res = {};
-    let offset = (page - 1) * pageSize;
+    let offset = (page - 1) * (Number(pageSize));
     let where = {};
+    if(dict_name){
+      where['dict_name']=dict_name;
+    }
+    if(dict_status!=undefined&&dict_status!=null&dict_status!=""){
+      where[dict_status]=Number(dict_status);
+    }
+    if(time){
+        where['createdAt']={
+          [Op.gt]:time.split(',')[0],
+          [Op.lt]:time.split(',')[1]
+        }
+    }
+  
     if (parent_id) {
       where.parent_id = Number(parent_id);
     }else{
       where.parent_id=0
     }
+    console.log(where)
     try {
       res.data = await this.ctx.model.DictMap.findAndCountAll(
         {

@@ -81,4 +81,6 @@ module.exports = (app) => {
     "/api/sticket",
     app.controller.jsapiautoth
   );
+
+app.router.resources('wxmangeuser',"/api/wxuserlist",app.controller.wxmangeuser);
 };
