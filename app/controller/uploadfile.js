@@ -2,7 +2,7 @@
 const Controller = require("egg").Controller;
 const fs = require("mz/fs");
 const path = require("path");
-const sendToWormhole = require('stream-wormhole');
+const sendToWormhole = require("stream-wormhole");
 /**
  * @Controller 文件上传操作
  */
@@ -23,11 +23,11 @@ class UserController extends Controller {
         let filePath = path.join("app/public/static", file.filename);
         let target = fs.createWriteStream(filePath);
         await pump(source, target);
-          data.push({
-            url: "http://localhost:7001/public/static/" + file.filename,
-            alt: "本地上传图片",
-            href: "http://localhost:7001/public/static/" + file.filename,
-          });
+        data.push({
+          url: "http://localhost:7001/public/static/" + file.filename,
+          alt: "本地上传图片",
+          href: "http://localhost:7001/public/static/" + file.filename,
+        });
       }
     } catch (err) {
     } finally {

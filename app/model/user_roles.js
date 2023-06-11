@@ -1,53 +1,53 @@
 /* indent size: 2 */
 
-module.exports = app => {
+module.exports = (app) => {
   const DataTypes = app.Sequelize;
 
-  const Model = app.model.define('user_roles', {
-    id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+  const Model = app.model.define(
+    "user_roles",
+    {
+      id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      user_id: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      menu_id: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      role_status: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true,
+        defaultValue: "0",
+      },
+      roles_order: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true,
+      },
+      role_name: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+      },
+      timestamp: {
+        //我们自己定义的时间戳字段
+        type: DataTypes.DATE,
+        defaultValue: app.Sequelize.NOW,
+      },
     },
-    user_id: {
-      type: DataTypes.STRING(50),
-      allowNull: true
-    },
-    menu_id: {
-      type: DataTypes.STRING(50),
-      allowNull: true
-    },
-    role_status: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      defaultValue: '0'
-    },
-    roles_order: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    role_name: {
-      type: DataTypes.STRING(50),
-      allowNull: true
-    },
-    createdAt: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
-    },
-    updatedAt: {
-      type: DataTypes.TIME,
-      allowNull: false,
-      defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
+    {
+      tableName: "user_roles",
+      timestamps: true,
+      createdAt: true,
+      updatedAt: true,
     }
-  }, {
-    tableName: 'user_roles'
-  });
+  );
 
-  Model.associate = function() {
-
-  }
+  Model.associate = function () {};
 
   return Model;
 };

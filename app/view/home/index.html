@@ -48,11 +48,10 @@
 
       socket.on("connect", () => {
         console.log("登录服务器成功");
-          document.getElementById("btn").addEventListener("click", function () {
-         console.log("正在链接");
-         socket.emit("exchange", 
-         "xiaomeimei");
-      });
+        document.getElementById("btn").addEventListener("click", function () {
+          console.log("正在链接");
+          socket.emit("exchange", "xiaomeimei");
+        });
       });
 
       const id = socket.id;
@@ -64,7 +63,7 @@
       socket.on("online", (msg) => {
         console.log("#online,", msg);
       });
-      socket.emit("xiaomei",234)
+      socket.emit("xiaomei", 234);
 
       // 系统事件
       socket.on("disconnect", (msg) => {

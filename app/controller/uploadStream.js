@@ -10,7 +10,7 @@ class UserController extends Controller {
   /**
    * @summary 文件上传（流的方式实现）
    * @description 使用文件流上传
-   * @router post /api/uploadStream 
+   * @router post /api/uploadStream
    * @request  filename 文件名 file 文件对象
    * @response 200
    */
@@ -41,12 +41,12 @@ class UserController extends Controller {
     });
     this.ctx.body = {
       errno: 0,
-      msg:"上传成功",
+      msg: "上传成功",
       data: [
         {
-          url: "http://localhost:7001/public/static/"+result.filename,
+          url: "http://localhost:7001/public/static/" + result.filename,
           alt: result.filename,
-          href:"http://localhost:7001/public/static/"+result.filename,
+          href: "http://localhost:7001/public/static/" + result.filename,
         },
       ],
     };

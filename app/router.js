@@ -7,14 +7,13 @@ module.exports = (app) => {
   const deceToken = app.middleware.deceToken();
   const { router, controller, io } = app;
 
-  // 这是定义常用路径的访问
   // router.get("/", controller.home.list);
 
   io.of("/").route("exchange", io.controller.home.exchange);
   router.get("/form", controller.home.form);
   router.post("/add", controller.home.add);
-  router.post("/api/uploadStream",controller.uploadStream.upload);
-  router.post("/api/upload",deceToken,  controller.uploadfile.upload);
+  router.post("/api/uploadStream", controller.uploadStream.upload);
+  router.post("/api/upload", deceToken, controller.uploadfile.upload);
 
   // 验证egg-passrt-local中间件配置额路由
   // router.get("/login",controller.login.index);
@@ -27,13 +26,11 @@ module.exports = (app) => {
   // io 是哟个的外部控制器
   router.get("/", controller.home.index);
 
-  // 这是定义一个resultApi
+  router.post("/uploadImage", controller.upload.uploadImage);
 
-  router.post("/uploadImage", deceToken,controller.upload.uploadImage);
-
-  app.router.resources("login", "/api/login",app.controller.login);
-  app.router.resources("user",  "/api/user", deceToken,app.controller.user);
-  app.router.resources("home",  "/api/home",deceToken, app.controller.home);
+  app.router.resources("login", "/api/login", app.controller.login);
+  app.router.resources("user", "/api/user", deceToken, app.controller.user);
+  app.router.resources("home", "/api/home", deceToken, app.controller.home);
 
   app.router.resources(
     "userMenu",
@@ -82,5 +79,9 @@ module.exports = (app) => {
     app.controller.jsapiautoth
   );
 
-app.router.resources('wxmangeuser',"/api/wxuserlist",app.controller.wxmangeuser);
+  app.router.resources(
+    "wxmangeuser",
+    "/api/wxuserlist",
+    app.controller.wxmangeuser
+  );
 };

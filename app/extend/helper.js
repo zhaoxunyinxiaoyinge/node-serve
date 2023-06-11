@@ -6,7 +6,7 @@
 const moment = require("moment");
 const { XMLParser, XMLBuilder } = require("fast-xml-parser");
 
-const sha1=require('sha1')
+const sha1 = require("sha1");
 
 /**
  * token 包进行token 生成和验证解析
@@ -78,7 +78,7 @@ module.exports = {
    * 生成token
    * @params data[string|object] secret[string] expires[object]
    * @return string
-   * 
+   *
    */
   createToken(data, secret, expires = { expiresIn: 60 * 60 }) {
     return jwt.sign(data, secret, expires);
@@ -89,25 +89,24 @@ module.exports = {
    * @params token[string]  secret[string]
    * @return string | object
    */
-  decodeToken(token,secret,callback) {
-   return  new Promise((resolve,reject)=>{
-        jwt.verify(token,secret,(err,data)=>{
-            if(err){
-              reject('非法token请求');
-            }else{
-              resolve(data);
-            }
-        });
-      })
+  decodeToken(token, secret) {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, secret, (err, data) => {
+        if (err) {
+          reject("非法token请求");
+        } else {
+          resolve(data);
+        }
+      });
+    });
   },
 
   /**
    * 获取sticket的签名
    */
-  getSignNoncestr(ctx,noncestr,timestamp,url,jsapi_ticket){
-      let str=`noncestr=${noncestr}&timestamp=${timestamp}&url=${url}&jsapi_ticket=${jsapi_ticket}`;
-      let arr=str.split('&').sort().join('&');
-      console.log(arr,"arr")
-      return sha1(arr);
-  }
+  getSignNoncestr(ctx, noncestr, timestamp, url, jsapi_ticket) {
+    let str = `noncestr=${noncestr}&timestamp=${timestamp}&url=${url}&jsapi_ticket=${jsapi_ticket}`;
+    let arr = str.split("&").sort().join("&");
+    return sha1(arr);
+  },
 };

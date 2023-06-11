@@ -12,47 +12,58 @@ class RolesController extends Controller {
    * @response 200 testResponse
    */
   async index() {
-    let { page = 1, pageSize = 10, ids,role_name,role_status } = this.ctx.query;
+    let {
+      page = 1,
+      pageSize = 10,
+      ids,
+      role_name,
+      role_status,
+    } = this.ctx.query;
     let res = {};
     let offset = (page - 1) * pageSize;
     let limit = Number(pageSize);
-    let where={};
-    if(role_name){
-      console.log("zhixingle ")
-      where.role_name=role_name;
+    let where = {};
+    if (role_name) {
+      console.log("zhixingle ");
+      where.role_name = role_name;
     }
-    if(role_status!==undefined&&role_status!==null&&role_status!==""){
-      console.log("zhixingle ")
-       where.role_status=role_status;
+    if (
+      role_status !== undefined &&
+      role_status !== null &&
+      role_status !== ""
+    ) {
+      console.log("zhixingle ");
+      where.role_status = role_status;
     }
-    console.log( where,"where")
+    console.log(where, "where");
     try {
       if (ids) {
-        let arrs=ids.split(",").map(item=>Number(item));
-        let data=await this.ctx.model.UserRoles.findAll({
-          where:{
-            id:{ 
-              [Op.in]: arrs, 
-            }   
-          }
-        })
-        let menuId='';
-        data.forEach(item => {
-            menuId+=item.menu_id;
+        let arrs = ids.split(",").map((item) => Number(item));
+        let data = await this.ctx.model.UserRoles.findAll({
+          where: {
+            id: {
+              [Op.in]: arrs,
+            },
+          },
+        });
+        let menuId = "";
+        data.forEach((item) => {
+          menuId += item.menu_id;
         });
 
-        let arrIds=Array.from(new Set(menuId.split(",").map(item=>Number(item))));
-        res.data=await this.ctx.model.UserMenu.findAll({
-            where:{
-              id:arrIds 
-              }
-           })
-
+        let arrIds = Array.from(
+          new Set(menuId.split(",").map((item) => Number(item)))
+        );
+        res.data = await this.ctx.model.UserMenu.findAll({
+          where: {
+            id: arrIds,
+          },
+        });
       } else {
         res.data = await this.ctx.model.UserRoles.findAndCountAll({
           offset,
           limit,
-          where
+          where,
         });
       }
       res.code = 0;
@@ -112,17 +123,19 @@ class RolesController extends Controller {
     this.ctx.body = res;
   }
 
-
-  async update(){
+  async update() {
     let { id } = this.ctx.params;
-    let data=this.ctx.request.body;
+    let data = this.ctx.request.body;
     let res = {};
     try {
-      res.data = await this.ctx.model.UserRoles.update({...data},{
-        where: {
-          id,
-        },
-      });
+      res.data = await this.ctx.model.UserRoles.update(
+        { ...data },
+        {
+          where: {
+            id,
+          },
+        }
+      );
       res.code = 0;
     } catch (e) {
       res.code = -1;

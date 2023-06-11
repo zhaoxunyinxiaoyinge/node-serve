@@ -6,7 +6,6 @@
 module.exports = {
   // 设置文本的回复消息
   getMessageAuto(options) {
-    console.log(options.MsgType, options);
     let xml = "";
     if (options.MsgType == "text") {
       xml = this.setText({
@@ -37,7 +36,7 @@ module.exports = {
           xml = this.setMusic({ ...options, playUrl: "" });
         }
       } else if (options.Event == "LOCATION") {
-        xml=this.setAreaMap({...options})
+        xml = this.setAreaMap({ ...options });
       }
     }
     return xml;
@@ -142,6 +141,6 @@ module.exports = {
       <Longitude>${options.Longitude}</Longitude>
       <Precision>${options.Precision}</Precision>
     </xml>`;
-    return areaText
+    return areaText;
   },
 };

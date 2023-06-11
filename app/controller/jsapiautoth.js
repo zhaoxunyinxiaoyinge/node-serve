@@ -17,7 +17,10 @@ class Sticket extends Controller {
         return (this.ctx.body = data);
       } else if (params.webToken) {
         let data = await this.ctx.service.getAccToken.getWebToken(params.code);
-        await this.ctx.service.getAccToken.reshWebToken({grant_type:'refresh_token',refresh_token:data.data.refresh_token});  
+        await this.ctx.service.getAccToken.reshWebToken({
+          grant_type: "refresh_token",
+          refresh_token: data.data.refresh_token,
+        });
         return (this.ctx.body = data);
       } else if (params.isReshToken) {
         let data = await this.ctx.service.getAccToken.reshWebToken(params);

@@ -44,25 +44,21 @@ module.exports = {
   //   package: "egg-redis",
   // },
 
-  passport :{
+  passport: {
     enable: true,
-    package: 'egg-passport',
+    package: "egg-passport",
   },
 
   // 这里是本地登录的配置
-passportLocal :{
+  passportLocal: {
     enable: true,
-    package: 'egg-passport-local',
+    package: "egg-passport-local",
   },
 
-  oss : {
+  oss: {
     enable: true,
-    package: 'egg-oss',
-  }
-
-
+    package: "egg-oss",
+  },
 };
-
-
 
 // 这是生成配置文档接口包文件

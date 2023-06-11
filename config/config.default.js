@@ -13,12 +13,9 @@ module.exports = (appInfo) => {
    **/
   const config = (exports = {});
 
-  const path = require("path");
-
-
   // 生成token的key值为 tokenStr
 
-  config.secretStr="shixianlitaibaiyyds";
+  config.secretStr = "shixianlitaibaiyyds";
 
   // 默认是开启了安全验证，防止csrf攻击
   config.security = {
@@ -54,13 +51,13 @@ module.exports = (appInfo) => {
     serverUrl: "https://hacker-news.firebaseio.com/v0",
     // appid: "wxf3dc859a604396ce",
     /**测试公众号appid 和appsecret */
-    appid:'wxa09a85bc80fdb723',
-    secret:"05a2790261643ae75925e07b810b3d84",
+    appid: "wxa09a85bc80fdb723",
+    secret: "05a2790261643ae75925e07b810b3d84",
     // secret: "bd64484875db53cc1c1f23cfcb1f5130",
 
     grant_type: "client_credential",
-    access_token:'',
-    jsapi_ticket:""
+    access_token: "",
+    jsapi_ticket: "",
   };
 
   config.view = {
@@ -78,10 +75,12 @@ module.exports = (appInfo) => {
     }),
     (config.sequelize = {
       dialect: "mysql",
-      host: "sh-cynosdbmysql-grp-rcf9rc6q.sql.tencentcdb.com",
-      port: 25325,
+      // host: "sh-cynosdbmysql-grp-rcf9rc6q.sql.tencentcdb.com",
+      host: "localhost",
+      // port: 25325,
+      port: 3306,
       database: "vue-admin",
-      password: "zhaoxunyin1234567.com",
+      password: "123456",
       define: {
         timestamps: false,
       },
@@ -118,8 +117,8 @@ module.exports = (appInfo) => {
 
   // 普通文件上传的模式
   config.multipart = {
-    mode: "file",//普通上传文件的方式
-    //  mode: "stream", //用流的方式来处理上传文件
+    // mode: "file",//普通上传文件的方式
+    mode: "stream", //用流的方式来处理上传文件
   };
 
   //设置跨域的域名和一些方法
@@ -168,12 +167,12 @@ module.exports = (appInfo) => {
   };
 
   // egg支持https服务开启的常用配置
-  config.cluster = {
-    https: {
-      key: path.join(__dirname, "../perssion/aidouc.work.key"),
-      cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
-    },
-  };
+  // config.cluster = {
+  //   https: {
+  //     key: path.join(__dirname, "../perssion/aidouc.work.key"),
+  //     cert: path.join(__dirname, "../perssion/aidouc.work_bundle.crt"),
+  //   },
+  // };
   return {
     ...config,
     ...userConfig,

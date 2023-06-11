@@ -19,28 +19,45 @@ class UserController extends Controller {
    */
 
   async index() {
-    let {id, user_name, password, checked, limit=10,role_name,page=1,token} =this.ctx.query;
-      let data = {};
-      let where={};
-      if(checked){
-        limit=99999;
+    let {
+      id,
+      user_name,
+      password,
+      checked,
+      limit = 10,
+      role_name,
+      page = 1,
+      token,
+    } = this.ctx.query;
+    let data = {};
+    let where = {};
+    if (checked) {
+      limit = 99999;
+    }
+    let pages = (page - 1) * limit;
+    Object.keys(this.ctx.query).forEach((item) => {
+      if (
+        this.ctx.query[item] !== "" &&
+        item !== null &&
+        item !== undefined &&
+        item !== "checked" &&
+        item !== "page" &&
+        item !== "limit" &&
+        item !== "pageSize"
+      ) {
+        where[item] = this.ctx.query[item];
       }
-      let pages=(page-1)*limit;
-      Object.keys(this.ctx.query).forEach(item=>{
-        if(this.ctx.query[item]!==''&&item!==null&&item!==undefined&&item!=='checked'&&item!=='page'&&item!=='limit'&&item!=='pageSize'){
-          where[item]=this.ctx.query[item];
-        }
-      })
+    });
     try {
       data.data = await this.ctx.app.model.Users.findAndCountAll({
         where,
         offset: pages,
-        limit:Number(limit),
+        limit: Number(limit),
       });
       data.code = 0;
       data.message = "查询成功";
     } catch (e) {
-      console.log(e,555)
+      console.log(e, 555);
       data.error = e;
       data.code = -1;
     }
@@ -71,7 +88,7 @@ class UserController extends Controller {
     this.ctx.body = res;
   }
 
-    /**
+  /**
    * @summary 修改用户信息
    * @description 测试swagger文档是否可用
    * @router put /api/user
@@ -96,8 +113,7 @@ class UserController extends Controller {
     this.ctx.body = data;
   }
 
-
-    /**
+  /**
    * @summary 删除用户信息
    * @description 测试swagger文档是否可用
    * @router delete /api/user

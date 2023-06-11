@@ -33,7 +33,7 @@ class HomeController extends Controller {
     // 设置cookie
     this.ctx.cookies.set("name", "zhaoxunyin", {});
     this.ctx.cookies.set("locale", "en-US");
-    
+
     await this.ctx.render("home/index");
   }
 
@@ -46,12 +46,12 @@ class HomeController extends Controller {
   }
 
   //用于对io 进行测试的方法
-  async index (){
-     await this.ctx.render('home/index');
+  async index() {
+    await this.ctx.render("home/index");
   }
 
-  async authCallback(){
-    await this.ctx.render('home/success.html');
+  async authCallback() {
+    await this.ctx.render("home/success.html");
   }
 }
 

@@ -28,17 +28,15 @@ class Login extends Controller {
           { username, password },
           secretStr
         );
-
         // 将token 写入对应的数据库用户
         let res = await this.ctx.model.Users.update(
-          { "token": token },
+          { token: token },
           {
             where: {
-              "id":data[0].id
-            }
+              id: data[0].id,
+            },
           }
         );
-        console.log(res, "res");
         data[0].token = token;
         this.ctx.body = {
           msg: "请求成功",

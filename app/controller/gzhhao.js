@@ -5,7 +5,6 @@
  * @Controller 公众号操作
  */
 let Controller = require("egg").Controller;
-const { nextTick } = require("mz-modules");
 let sha1 = require("sha1");
 class Wgzhhao extends Controller {
   async index() {
@@ -30,9 +29,9 @@ class Wgzhhao extends Controller {
 
   // 创建菜单接口
   async update() {
-    let params=await this.ctx.fun.then(res=>res);
+    let params = await this.ctx.fun.then((res) => res);
     let data = await this.ctx.service.getAccToken.customMenu(params);
-    this.ctx.body=data
+    this.ctx.body = data;
   }
 
   /**
@@ -41,7 +40,6 @@ class Wgzhhao extends Controller {
   async destroy() {
     let data = null;
     let params = this.ctx.params;
-    console.log(params.menuid, "menuid");
     if (params.menuid) {
       data = await this.ctx.service.getAccToken.deleteItem(params);
       return data;

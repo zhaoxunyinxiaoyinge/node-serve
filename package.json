@@ -22,7 +22,7 @@
     "egg-swagger-doc": "^2.3.2",
     "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.3.0",
-    "fast-xml-parser": "^4.0.9",
+    "fast-xml-parser": "^4.0.11",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "multer": "^1.4.4",
@@ -43,6 +43,9 @@
     "eslint": "^5.13.0",
     "eslint-config-egg": "^7.1.0",
     "factory-girl": "^5.0.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
     "sequelize-cli": "^6.4.1"
   },
   "engines": {
@@ -61,7 +64,9 @@
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
     "dev_db": "npx egg-sequelize-auto -h sh-cynosdbmysql-grp-rcf9rc6q.sql.tencentcdb.com -d vue-admin   -u root -x zhaoxunyin1234567.com -p 25325 -o  app/model",
-    "autod": "autod"
+    "dev_local_db": "npx egg-sequelize-auto -h localhost -d vue-admin -u root -x 123456 -p 3306 -o app/model",
+    "autod": "autod",
+    "prepare": "husky install"
   },
   "ci": {
     "version": "10"
@@ -71,5 +76,8 @@
     "url": ""
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
 }

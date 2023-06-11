@@ -1,3 +1,3 @@
-module.exports={
-    email:"邮件"
-}   
+module.exports = {
+  email: "邮件",
+};

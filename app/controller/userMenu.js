@@ -28,10 +28,10 @@ class UserMenuContronl extends Controller {
           where: query,
         });
         data.code = 0;
-      } else if (detail==='true') {
+      } else if (detail === "true") {
         data.data = await this.ctx.model.UserMenu.findAll({
           where: {
-            id
+            id,
           },
         });
         data.code = 0;
@@ -42,23 +42,22 @@ class UserMenuContronl extends Controller {
           },
         });
         data.code = 0;
-      }else if(isMenu==1){
+      } else if (isMenu == 1) {
         data.data = await this.ctx.model.UserMenu.findAll({
           where: {
-            isMenu:{
-              [Op.not]:2
+            isMenu: {
+              [Op.not]: 2,
             },
           },
         });
         data.code = 0;
-      }
-      else {
+      } else {
         if (all) {
           let currentPage = (page - 1) * pageSize;
           data.data = await this.ctx.model.UserMenu.findAndCountAll({
             offset: currentPage,
             limit: Number(pageSize),
-       });
+          });
           data.code = 0;
         }
       }
@@ -110,16 +109,19 @@ class UserMenuContronl extends Controller {
 
   async update() {
     let data = this.ctx.request.body;
-    let params=this.ctx.params;
+    let params = this.ctx.params;
     delete data.createdAt;
     delete data.updatedAt;
     let res = {};
     try {
       res.code = 0;
-      res.data = await this.ctx.model.UserMenu.update({...data},{
-        where: params
-      });
-      console.log(res,"555")
+      res.data = await this.ctx.model.UserMenu.update(
+        { ...data },
+        {
+          where: params,
+        }
+      );
+      console.log(res, "555");
     } catch (e) {
       res.code = 0;
       res.data = e;
